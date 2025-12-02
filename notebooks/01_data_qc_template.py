@@ -51,15 +51,23 @@ def main():
             bid = float(row["bid"]); ask = float(row["ask"])
             if not (bid > 0.0 and ask > bid):
                 continue
-            mid = (bid + ask)/2.0 if "mid" not in row else float(row.get("mid", (bid+ask)/2.0))
-            S = float(row["S"]); K = float(row["K"])
-            r = float(row.get("r", 0.03)); q = float(row.get("q", 0.0))
-            T = compute_T(int(row["dte"]))
-            typ = row["type"]
-            iv = implied_vol_bs(mid, S, K, T, r, q, typ)
-            # forward & moneyness
-            F = S * exp((r - q) * T)
-            k = math.log(K / F)
+           mid = (bid + ask)/2.0 if "mid" not in row else float(row.get("mid", (bid+ask)/2.0))
+           S = float(row["S"]); K = float(row["K"])
+           r = float(row.get("r", 0.03)); q = float(row.get("q", 0.0))
+           T = compute_T(int(row["dte"]))
+           typ = row["type"]
+
+          # --- 关键护栏：跳过不可用行 ---
+           if (S <= 0) or (K <= 0) or (mid <= 0) or (ask <= bid):
+               continue
+
+           iv = implied_vol_bs(mid, S, K, T, r, q, typ)
+
+           # --- F 加下限，防止 0/负值 ---
+           F = S * exp((r - q) * T)
+           F = max(F, 1e-12)
+           k = math.log(K / F)
+
             row_out = dict(row)
             row_out["T"] = f"{T:.6f}"
             row_out["iv"] = f"{iv:.6f}" if iv == iv else ""
