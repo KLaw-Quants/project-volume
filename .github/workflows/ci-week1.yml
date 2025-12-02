@@ -1,0 +1,50 @@
+name: ci-week1
+on:
+  push: { branches: [ main ] }
+  pull_request: { branches: [ main ] }
+
+jobs:
+  qc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Normalize Cboe sample
+        run: |
+          python scripts/normalize_cboe.py --in_csv data/UnderlyingOptionsEODCalcs_2023-08-25_cgi_or_historical.csv --out_csv data/cboe_20230825_norm.csv
+      - name: Run Week1 QC (on normalized)
+        run: |
+          # 为了复用 Week1 脚本，我们把 normalized 的列名映射成脚本期望的简表
+          # 这里简单生成一个 sample_options_chain.csv 再跑
+          python - <<'PY'
+import pandas as pd
+df = pd.read_csv("data/cboe_20230825_norm.csv")
+out = pd.DataFrame({
+  "date": df["quote_date"],
+  "underlying": df["underlying_symbol"],
+  "S": df["S"],
+  "r": df.get("r", 0.03),
+  "q": df.get("q", 0.0),
+  "expiry": df["expiration"],
+  "dte": ((pd.to_datetime(df["expiration"]) - pd.to_datetime(df["quote_date"])).dt.days).clip(lower=1),
+  "K": df["strike"],
+  "type": df["option_type"].str.upper().map({"C":"C","P":"P"}),
+  "bid": df["bid_eod"],
+  "ask": df["ask_eod"],
+  "mid": df["mid"],
+  "volume": df.get("trade_volume", 0),
+  "openInterest": df.get("open_interest", 0)
+})
+out.to_csv("data/sample_options_chain.csv", index=False)
+print("Prepared: data/sample_options_chain.csv, rows:", len(out))
+PY
+          python notebooks/01_data_qc_template.py
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: week1_outputs
+          path: |
+            data/cboe_20230825_norm.csv
+            data/sample_with_iv.csv
