@@ -8,9 +8,9 @@ permalink: /contact/
 
 欢迎与我交流，可以通过以下方式联系我：
 
-- **邮箱**：[your-email@example.com](mailto:your-email@example.com)
+- **邮箱**：[klaw_mkt@yahoo.com](mailto:klaw_mkt@yahoo.com)
 - **LinkedIn**：[你的 LinkedIn 链接](#)
 - **Instagram**：[你的 Instagram 链接](#)
 - **GitHub**：[你的 GitHub 链接](#)
 
-<!-- 把上面的占位链接替换成你自己的实际信息 -->
+<!-- 还没提供的社交链接先留占位，之后替换成你自己的实际信息 -->

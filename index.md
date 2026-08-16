@@ -4,10 +4,10 @@ title: 首页
 ---
 
 <section class="hero">
-  <h1>你好，我是 <span class="highlight">你的名字</span> 👋</h1>
+  <h1>你好，我是 <span class="highlight">Kai-Lap Law</span> 👋</h1>
   <p class="lead">
-    2028 级悉尼大学（University of Sydney）医学博士（MD）候选人。<br>
-    这里记录我从备考、申请到正式踏入医学院的心路历程，以及学习、生活与思考。
+    现主修数学与会计（Mathematics and Accounting），2028 级悉尼大学（University of Sydney）医学博士（MD）候选人。<br>
+    这里记录我从本科、备考、申请到正式踏入医学院的心路历程，以及学习、生活与思考。
   </p>
   <div class="hero-links">
     <a class="btn" href="{{ '/blog/' | relative_url }}">阅读博客</a>

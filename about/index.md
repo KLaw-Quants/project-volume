@@ -6,13 +6,13 @@ permalink: /about/
 
 # 关于我
 
-你好，我是**你的名字**，即将于 2028 年入学悉尼大学（University of Sydney），攻读医学博士（Doctor of Medicine, MD）。
+你好，我是 **Kai-Lap Law**，本科主修数学与会计（Mathematics and Accounting），即将于 2028 年入学悉尼大学（University of Sydney），攻读医学博士（Doctor of Medicine, MD）。
 
-> 这里可以写你的求学背景、本科专业、为什么选择医学、对未来临床方向的初步想法等。
+> 这里可以继续补充你的求学背景细节、为什么选择医学、对未来临床方向的初步想法等。
 
 ## 求学之路
 
-- **20XX - 20XX**：本科，就读于 XX 大学 XX 专业
+- **本科**：主修数学与会计（Mathematics and Accounting）
 - **20XX**：申请悉尼大学 MD 项目
 - **2028**：正式入学，开启医学之路
 
