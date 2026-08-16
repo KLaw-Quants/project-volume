@@ -1,0 +1,40 @@
+title: "我的医学之路"
+description: "一名即将于 2028 年入学悉尼大学（USYD）医学专业（MD）的学生，记录求学、思考与成长"
+author: "你的名字"
+email: "your-email@example.com"
+lang: zh-CN
+
+# 网站地址（部署到 GitHub Pages 后按需修改）
+baseurl: ""
+url: ""
+
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+
+collections:
+  posts:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# 不参与网站构建的目录/文件（本仓库同时存放量化研究项目内容）
+exclude:
+  - backtests
+  - data
+  - notebooks
+  - scripts
+  - reports
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
